@@ -48,5 +48,14 @@ jobs:
           target: 'http://testphp.vulnweb.com/'
           rules_file_name: '.zap/rules.tsv'
           cmd_options: '-a'
-  
+  security:
+    runs-on: my-github-runner
+    steps:
+      - name: Create certificate
+        run: cat <<< "${{secrets.BASE_64_CERTIFICATE_CONTENT}}" > my-cert.pem
+      - name: Run Synopsys Detect
+        uses: synopsys-sig/detect-action@v0.3.0
+        env:
+         NODE_EXTRA_CA_CERTS: ./my-cert.pem
+
 
