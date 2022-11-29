@@ -35,14 +35,13 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           
 
-  security:
+  coverity:
     runs-on: ubuntu-latest
     steps:
-      - name: Create certificate
-        run: cat <<< "${{secrets.BASE_64_CERTIFICATE_CONTENT}}" > my-cert.pem
-      - name: Run Synopsys Detect
-        uses: synopsys-sig/detect-action@v0.3.0
-        env:
-         NODE_EXTRA_CA_CERTS: ./my-cert.pem
+    - uses: actions/checkout@v3
+    - uses: vapier/coverity-scan-action@v1
+      with:
+        email: ${{ secrets.COVERITY_SCAN_EMAIL }}
+        token: ${{ secrets.COVERITY_SCAN_TOKEN }}
 
 
