@@ -1,3 +1,4 @@
+---
 name: Test Node with workflow
 on:
   push:
@@ -18,31 +19,30 @@ jobs:
       - name: Install NPM dependencies
         run: npm install
       - name: Execute Node application
-        run: node index.js 
-  
-        
+        run: node index.js
   sonarcloud:
     name: SonarCloud
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          
-
   coverity:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: vapier/coverity-scan-action@v1
-      with:
-        email:  venkat.kurukuntla@gmail.com
+      - name: Unofficial Coverity Scan
+        uses: vapier/coverity-scan-action@v1
+        with: null
         token: RA216bvK-lldAFU8ZP-syQ
-        command: make
+        email: venkat.kurukuntla@gmail.com
+        build_language: JavaScript
+        build_platform: null
+        command: null
+
 
 
