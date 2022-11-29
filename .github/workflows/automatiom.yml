@@ -43,5 +43,6 @@ jobs:
       with:
         email:  venkat.kurukuntla@gmail.com
         token: RA216bvK-lldAFU8ZP-syQ
+        command: make
 
 
