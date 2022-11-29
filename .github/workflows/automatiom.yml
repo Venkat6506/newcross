@@ -32,17 +32,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
   coverity:
     runs-on: ubuntu-latest
     steps:
-      - name: Unofficial Coverity Scan
-        uses: vapier/coverity-scan-action@v1
-        with: null
-        token: RA216bvK-lldAFU8ZP-syQ
-        email: venkat.kurukuntla@gmail.com
-        build_language: JavaScript
-        build_platform: null
-        command: null
-
-
-
+    - uses: actions/checkout@v3
+    - uses: vapier/coverity-scan-action@v1
+      with:
+        email: ${{ secrets.COVERITY_SCAN_EMAIL }}
+        token: ${{ secrets.COVERITY_SCAN_TOKEN }}  
